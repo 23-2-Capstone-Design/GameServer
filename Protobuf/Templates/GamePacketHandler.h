@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "Message.pb.h"
 
 class GameSession;
@@ -7,21 +7,21 @@ extern PacketHandlerFunc GPacketHandler[UINT16_MAX];
 
 enum : uint16_t
 {
-	PKT_C_VERIFY_TOKEN = 1000,
-	PKT_S_VERIFY_TOKEN = 1001,
-	PKT_C_LOBBY_CHAT = 1002,
-	PKT_S_LOBBY_CHAT = 1003,
+{%- for pkt in parser.total_pkt %}
+	PKT_{{pkt.name}} = {{pkt.id}},
+{%- endfor %}
 };
 
 bool Handle_INVALID(shared_ptr<GameSession>& session, BYTE* bufer, int numOfBytes);
-bool Handle_C_VERIFY_TOKEN(shared_ptr<GameSession>& session, ProjectJ::C_VERIFY_TOKEN& packet);
-bool Handle_C_LOBBY_CHAT(shared_ptr<GameSession>& session, ProjectJ::C_LOBBY_CHAT& packet);
+{%- for pkt in parser.recv_pkt %}
+bool Handle_{{pkt.name}}(shared_ptr<GameSession>& session, ProjectJ::{{pkt.name}}& packet);
+{%- endfor %}
 
 
 // 소켓 수신 데이터 처리 및 송신 버퍼 생성 클래스
 // 최초 작성자: 박별
 // 수정자: 
-// 최종 수정일: 2023-10-10 자동 생성
+// 최종 수정일: {{date}} 자동 생성
 class GamePacketHandler
 {
 public:
@@ -31,14 +31,9 @@ public:
 		{
 			GPacketHandler[i] = Handle_INVALID;
 		}
-		GPacketHandler[PKT_C_VERIFY_TOKEN] = [](shared_ptr<GameSession> session, BYTE* buffer, int numOfBytes)
-		{
-			return HandlePacket<ProjectJ::C_VERIFY_TOKEN>(Handle_C_VERIFY_TOKEN, session, buffer, numOfBytes);
-		};
-		GPacketHandler[PKT_C_LOBBY_CHAT] = [](shared_ptr<GameSession> session, BYTE* buffer, int numOfBytes)
-		{
-			return HandlePacket<ProjectJ::C_LOBBY_CHAT>(Handle_C_LOBBY_CHAT, session, buffer, numOfBytes);
-		};
+{%- for pkt in parser.recv_pkt %}
+		GPacketHandler[PKT_{{pkt.name}}] = [](shared_ptr<GameSession> session, BYTE* buffer, int numOfBytes) {return HandlePacket<ProjectJ::{{pkt.name}}>(Handle_{{pkt.name}}, session, buffer, numOfBytes);};
+{%- endfor %}
 	}
 
 	static bool HandlePacket(shared_ptr<GameSession>& session, BYTE* buffer, int numOfBytes)
@@ -47,15 +42,9 @@ public:
 		return GPacketHandler[header->type](session, buffer, numOfBytes);
 	}
 
-	static shared_ptr<SendBuffer> MakeSendBuffer(ProjectJ::S_VERIFY_TOKEN& packet)
-	{
-		return MakeSendBuffer(packet, PKT_S_VERIFY_TOKEN);
-	}
-
-	static shared_ptr<SendBuffer> MakeSendBuffer(ProjectJ::S_LOBBY_CHAT& packet)
-	{
-		return MakeSendBuffer(packet, PKT_S_LOBBY_CHAT);
-	}
+{%- for pkt in parser.send_pkt %}
+	static shared_ptr<SendBuffer> MakeSendBuffer(ProjectJ::{{pkt.name}}& packet) {return MakeSendBuffer(packet, PKT_{{pkt.name}});}
+{%- endfor %}
 
 private:
 	template <typename PacketMessage, typename ProcessFunc>

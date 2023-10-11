@@ -1,9 +1,9 @@
-DROP TABLE IF EXISTS [dbo].[PlayerAccount]
-CREATE TABLE [dbo].[PlayerAccount]
+DROP TABLE IF EXISTS [dbo].[PlayerAccounts]
+CREATE TABLE [dbo].[PlayerAccounts]
 (
-	[player_id] INT NOT NULL PRIMARY KEY IDENTITY,
-	[name] NVARCHAR(50) NOT NULL,
-	[nickname] NVARCHAR(50) NOT NULL,
-	[password] NVARCHAR(50) NOT NULL,
-	[registration_date] DATETIME NOT NULL DEFAULT GETDATE()
+	[player_id] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	[name] NVARCHAR(20) NOT NULL,
+	[nickname] NVARCHAR(12) NOT NULL,
+	[password] BINARY(60) NOT NULL,
+	[registration_date] DATETIME NOT NULL  DEFAULT GETDATE()
 )

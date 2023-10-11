@@ -20,25 +20,21 @@ PROTOBUF_PRAGMA_INIT_SEG
 namespace _pb = ::PROTOBUF_NAMESPACE_ID;
 namespace _pbi = _pb::internal;
 
-namespace protocol {
-}  // namespace protocol
-static const ::_pb::EnumDescriptor* file_level_enum_descriptors_Enum_2eproto[2];
+namespace ProjectJ {
+}  // namespace ProjectJ
+static const ::_pb::EnumDescriptor* file_level_enum_descriptors_Enum_2eproto[1];
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_Enum_2eproto = nullptr;
 const uint32_t TableStruct_Enum_2eproto::offsets[1] = {};
 static constexpr ::_pbi::MigrationSchema* schemas = nullptr;
 static constexpr ::_pb::Message* const* file_default_instances = nullptr;
 
 const char descriptor_table_protodef_Enum_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\nEnum.proto\022\010protocol*u\n\nPacketType\022\013\n\007"
-  "PT_NONE\020\000\022\r\n\tPT_C_JOIN\020\001\022\r\n\tPT_S_JOIN\020\002\022"
-  "\016\n\nPT_C_LEAVE\020\003\022\016\n\nPT_S_LEAVE\020\004\022\r\n\tPT_C_"
-  "MOVE\020\005\022\r\n\tPT_S_MOVE\020\006*6\n\tErrorCode\022\013\n\007EC"
-  "_NONE\020\000\022\034\n\030EC_S_SIGNUP_DUPLICATE_ID\020\001b\006p"
-  "roto3"
+  "\n\nEnum.proto\022\010ProjectJ*\034\n\010TestEnum\022\007\n\003on"
+  "e\020\000\022\007\n\003two\020\001b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Enum_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Enum_2eproto = {
-    false, false, 205, descriptor_table_protodef_Enum_2eproto,
+    false, false, 60, descriptor_table_protodef_Enum_2eproto,
     "Enum.proto",
     &descriptor_table_Enum_2eproto_once, nullptr, 0, 0,
     schemas, file_default_instances, TableStruct_Enum_2eproto::offsets,
@@ -51,31 +47,12 @@ PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_Enum_2ep
 
 // Force running AddDescriptors() at dynamic initialization time.
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_Enum_2eproto(&descriptor_table_Enum_2eproto);
-namespace protocol {
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* PacketType_descriptor() {
+namespace ProjectJ {
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* TestEnum_descriptor() {
   ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
   return file_level_enum_descriptors_Enum_2eproto[0];
 }
-bool PacketType_IsValid(int value) {
-  switch (value) {
-    case 0:
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-      return true;
-    default:
-      return false;
-  }
-}
-
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ErrorCode_descriptor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
-  return file_level_enum_descriptors_Enum_2eproto[1];
-}
-bool ErrorCode_IsValid(int value) {
+bool TestEnum_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
@@ -87,7 +64,7 @@ bool ErrorCode_IsValid(int value) {
 
 
 // @@protoc_insertion_point(namespace_scope)
-}  // namespace protocol
+}  // namespace ProjectJ
 PROTOBUF_NAMESPACE_OPEN
 PROTOBUF_NAMESPACE_CLOSE
 

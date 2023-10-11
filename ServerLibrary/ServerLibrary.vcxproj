@@ -146,6 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="DBConnection.h" />
+    <ClInclude Include="DeadLockProfiler.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="Iocp.h" />
     <ClInclude Include="Listener.h" />
@@ -165,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DBConnection.cpp" />
+    <ClCompile Include="DeadLockProfiler.cpp" />
     <ClCompile Include="Global.cpp" />
     <ClCompile Include="Iocp.cpp" />
     <ClCompile Include="Listener.cpp" />
@@ -184,12 +186,6 @@
     <ClCompile Include="SessionBase.cpp" />
     <ClCompile Include="SocketUtils.cpp" />
     <ClCompile Include="ThreadLocal.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\protobuf\Enum.proto" />
-    <None Include="..\protobuf\GenCode.bat" />
-    <None Include="..\protobuf\Packet.proto" />
-    <None Include="..\protobuf\Struct.proto" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

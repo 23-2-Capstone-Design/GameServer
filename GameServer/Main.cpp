@@ -17,7 +17,7 @@ int main()
 	GamePacketHandler::Init();
 
 	vector<thread> threads;
-	auto service = make_shared<GameService>(NetAddress(L"127.0.0.1", 3000),
+	auto service = make_shared<GameService>(NetAddress(L"0.0.0.0", 3000),
 	                                        [=]() { return make_shared<GameSession>(); },
 	                                        1000);
 	if (service->Init())
@@ -32,16 +32,10 @@ int main()
 		}
 	}
 
-	auto sb = GSendBufferManager->GetSendBuffer(1);
-	char tt = 'c';
-	memcpy(sb->GetBuffer(), &tt, 1);
-	sb->Close(1);
-	int count = 1;
 	while (true)
 	{
-		protocol::S_LEAVE pkt;
-		pkt.set_id(count);
-		count++;
+		ProjectJ::S_VERIFY_TOKEN pkt;
+		pkt.set_result(true);
 		auto sendBuffer = GamePacketHandler::MakeSendBuffer(pkt);
 		this_thread::sleep_for(1s);
 		service->BroadCastWithoutSelf(nullptr, sendBuffer);

@@ -73,10 +73,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(SolutionDir)Library\include\;$(SolutionDir)ServerLibrary\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Library\lib\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)Binary\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(SolutionDir)Library\include\;$(SolutionDir)ServerLibrary\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Library\lib\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)Binary\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -150,7 +152,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="GamePacketHandler.cpp" />
-    <ClCompile Include="Packet.pb.cc">
+    <ClCompile Include="Message.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -169,10 +171,16 @@
     <ClInclude Include="GameService.h" />
     <ClInclude Include="GameSession.h" />
     <ClInclude Include="GamePacketHandler.h" />
-    <ClInclude Include="Packet.pb.h" />
+    <ClInclude Include="Message.pb.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="Struct.pb.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\protobuf\Enum.proto" />
+    <None Include="..\protobuf\GenCode.bat" />
+    <None Include="..\protobuf\Message.proto" />
+    <None Include="..\protobuf\Struct.proto" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
